@@ -56,6 +56,7 @@ void Meu_frame::desenharDisplayFile(QPainter& painter){
     painter.restore();
  }
 
+<<<<<<< HEAD
 void Minha_Face::addLinha(double x1, double y1, double x2, double y2)
 {
     arestas.push_back(Minha_Linha(x1, y1, x2, y2));
@@ -88,6 +89,8 @@ DisplayFile::~DisplayFile(){
     }
 }
 
+=======
+>>>>>>> de9c65f (Implementacao de transformacoes geometricas)
 void DisplayFile::insertInicio(Meu_Objeto* obj)
 {
     Node* novo = new Node(obj);

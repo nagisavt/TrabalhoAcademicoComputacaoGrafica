@@ -1,5 +1,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+<<<<<<< HEAD
+=======
+#include "meu_frame.h"
+>>>>>>> de9c65f (Implementacao de transformacoes geometricas)
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -29,8 +33,70 @@ MainWindow::MainWindow(QWidget *parent)
     estrela->addLinha(-129, -197, -200, 20);
     ui->Mundo->displayFile.insertInicio(estrela);
 
+<<<<<<< HEAD
 }
 
+=======
+    preencherListaObjetos();
+
+    connect(ui->btnTransladar, &QPushButton::clicked, this, &MainWindow::on_btnTransladar_clicked);
+    connect(ui->btnEscalar, &QPushButton::clicked, this, &MainWindow::on_btnEscalar_clicked);
+    connect(ui->btnRotacionar, &QPushButton::clicked, this, &MainWindow::on_btnRotacionar_clicked);
+
+}
+
+void MainWindow::preencherListaObjetos() {
+    ui->comboObjetos->clear();
+    auto nomes = ui->Mundo->displayFile.listNames();
+    for (const auto& n : nomes) {
+        ui->comboObjetos->addItem(QString::fromStdString(n));
+    }
+}
+
+void MainWindow::on_btnTransladar_clicked() {
+    const QString sel = ui->comboObjetos->currentText();
+    if (sel.isEmpty()) return;
+
+    const double dx = ui->spinDx->value();
+    const double dy = ui->spinDy->value();
+    Meu_Objeto* obj = ui->Mundo->displayFile.findByName(sel.toStdString());
+    if (!obj) return;
+
+    obj->translada(dx, dy);
+
+    ui->Mundo->update();
+}
+
+void MainWindow::on_btnEscalar_clicked() {
+    const QString sel = ui->comboObjetos->currentText();
+    if (sel.isEmpty()) return;
+
+    const double sx = ui->spinSx->value();
+    const double sy = ui->spinSy->value();
+    if (sx == 0.0 || sy == 0.0) return;
+
+    Meu_Objeto* obj = ui->Mundo->displayFile.findByName(sel.toStdString());
+    if (!obj) return;
+    obj->escalaNoCentro(sx, sy);
+
+    ui->Mundo->update();
+}
+
+void MainWindow::on_btnRotacionar_clicked() {
+    const QString sel = ui->comboObjetos->currentText();
+    if (sel.isEmpty()) return;
+
+    double ang = ui->spinAng->value();
+
+    Meu_Objeto* obj = ui->Mundo->displayFile.findByName(sel.toStdString());
+    if (!obj) return;
+    obj->rotacionaNoCentro(ang);
+
+    ui->Mundo->update();
+}
+
+
+>>>>>>> de9c65f (Implementacao de transformacoes geometricas)
 MainWindow::~MainWindow()
 {
     delete ui;

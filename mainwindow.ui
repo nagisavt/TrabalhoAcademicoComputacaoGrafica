@@ -6,7 +6,11 @@
    <rect>
     <x>0</x>
     <y>0</y>
+<<<<<<< HEAD
     <width>800</width>
+=======
+    <width>759</width>
+>>>>>>> de9c65f (Implementacao de transformacoes geometricas)
     <height>600</height>
    </rect>
   </property>
@@ -14,7 +18,215 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+<<<<<<< HEAD
    <layout class="QVBoxLayout" name="verticalLayout">
+=======
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QWidget" name="widget" native="true">
+      <property name="maximumSize">
+       <size>
+        <width>150</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <widget class="QPushButton" name="btnTransladar">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>40</y>
+         <width>71</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Transladar</string>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="spinDx">
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>40</y>
+         <width>72</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="minimum">
+        <double>-1000.000000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>1000.000000000000000</double>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="spinDy">
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>70</y>
+         <width>72</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>250</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="minimum">
+        <double>-1000.000000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>1000.000000000000000</double>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="comboObjetos">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>10</y>
+         <width>151</width>
+         <height>24</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label">
+       <property name="geometry">
+        <rect>
+         <x>120</x>
+         <y>40</y>
+         <width>49</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>X</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_2">
+       <property name="geometry">
+        <rect>
+         <x>120</x>
+         <y>80</y>
+         <width>49</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Y</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnEscalar">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>120</y>
+         <width>71</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Escalar</string>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="spinSx">
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>120</y>
+         <width>71</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="minimum">
+        <double>0.100000000000000</double>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="spinSy">
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>150</y>
+         <width>71</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="minimum">
+        <double>0.010000000000000</double>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_3">
+       <property name="geometry">
+        <rect>
+         <x>120</x>
+         <y>120</y>
+         <width>49</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>X</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_4">
+       <property name="geometry">
+        <rect>
+         <x>120</x>
+         <y>160</y>
+         <width>49</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Y</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnRotacionar">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>200</y>
+         <width>71</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Rotacionar</string>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="spinAng">
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>200</y>
+         <width>71</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="minimum">
+        <double>-360.000000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>360.000000000000000</double>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_5">
+       <property name="geometry">
+        <rect>
+         <x>120</x>
+         <y>200</y>
+         <width>49</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>o</string>
+       </property>
+      </widget>
+     </widget>
+    </item>
+>>>>>>> de9c65f (Implementacao de transformacoes geometricas)
     <item>
      <widget class="Meu_frame" name="Mundo">
       <property name="frameShape">
@@ -23,6 +235,7 @@
       <property name="frameShadow">
        <enum>QFrame::Shadow::Raised</enum>
       </property>
+<<<<<<< HEAD
      </widget>
     </item>
     <item>
@@ -30,6 +243,9 @@
       <property name="text">
        <string>Desenha</string>
       </property>
+=======
+      <layout class="QHBoxLayout" name="horizontalLayout_2"/>
+>>>>>>> de9c65f (Implementacao de transformacoes geometricas)
      </widget>
     </item>
    </layout>
@@ -39,8 +255,13 @@
     <rect>
      <x>0</x>
      <y>0</y>
+<<<<<<< HEAD
      <width>800</width>
      <height>25</height>
+=======
+     <width>759</width>
+     <height>21</height>
+>>>>>>> de9c65f (Implementacao de transformacoes geometricas)
     </rect>
    </property>
   </widget>
@@ -59,6 +280,7 @@
   </customwidget>
  </customwidgets>
  <resources/>
+<<<<<<< HEAD
  <connections>
   <connection>
    <sender>BotaoDesenha</sender>
@@ -77,4 +299,7 @@
    </hints>
   </connection>
  </connections>
+=======
+ <connections/>
+>>>>>>> de9c65f (Implementacao de transformacoes geometricas)
 </ui>
