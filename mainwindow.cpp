@@ -1,9 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-<<<<<<< HEAD
-=======
 #include "meu_frame.h"
->>>>>>> de9c65f (Implementacao de transformacoes geometricas)
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -16,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->Mundo->displayFile.insertInicio(new Meu_Ponto("p2", 0, 0));
 
     //LINHAS
-    ui->Mundo->displayFile.insertInicio(new Minha_Linha("p2",10,10,50,100));
+    ui->Mundo->displayFile.insertInicio(new Minha_Linha("l1",10,10,50,100));
 
     //POLIGONOS
     Minha_Face* triangulo = new Minha_Face("f1");
@@ -33,10 +30,6 @@ MainWindow::MainWindow(QWidget *parent)
     estrela->addLinha(-129, -197, -200, 20);
     ui->Mundo->displayFile.insertInicio(estrela);
 
-<<<<<<< HEAD
-}
-
-=======
     preencherListaObjetos();
 
     connect(ui->btnTransladar, &QPushButton::clicked, this, &MainWindow::on_btnTransladar_clicked);
@@ -95,8 +88,6 @@ void MainWindow::on_btnRotacionar_clicked() {
     ui->Mundo->update();
 }
 
-
->>>>>>> de9c65f (Implementacao de transformacoes geometricas)
 MainWindow::~MainWindow()
 {
     delete ui;

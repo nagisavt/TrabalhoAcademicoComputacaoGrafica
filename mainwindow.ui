@@ -6,11 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-<<<<<<< HEAD
     <width>800</width>
-=======
-    <width>759</width>
->>>>>>> de9c65f (Implementacao de transformacoes geometricas)
     <height>600</height>
    </rect>
   </property>
@@ -18,9 +14,6 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-<<<<<<< HEAD
-   <layout class="QVBoxLayout" name="verticalLayout">
-=======
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
      <widget class="QWidget" name="widget" native="true">
@@ -226,7 +219,6 @@
       </widget>
      </widget>
     </item>
->>>>>>> de9c65f (Implementacao de transformacoes geometricas)
     <item>
      <widget class="Meu_frame" name="Mundo">
       <property name="frameShape">
@@ -235,17 +227,7 @@
       <property name="frameShadow">
        <enum>QFrame::Shadow::Raised</enum>
       </property>
-<<<<<<< HEAD
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="BotaoDesenha">
-      <property name="text">
-       <string>Desenha</string>
-      </property>
-=======
       <layout class="QHBoxLayout" name="horizontalLayout_2"/>
->>>>>>> de9c65f (Implementacao de transformacoes geometricas)
      </widget>
     </item>
    </layout>
@@ -255,13 +237,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-<<<<<<< HEAD
      <width>800</width>
-     <height>25</height>
-=======
-     <width>759</width>
-     <height>21</height>
->>>>>>> de9c65f (Implementacao de transformacoes geometricas)
+     <height>22</height>
     </rect>
    </property>
   </widget>
@@ -280,26 +257,5 @@
   </customwidget>
  </customwidgets>
  <resources/>
-<<<<<<< HEAD
- <connections>
-  <connection>
-   <sender>BotaoDesenha</sender>
-   <signal>clicked()</signal>
-   <receiver>Mundo</receiver>
-   <slot>desenhar()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>300</x>
-     <y>545</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>312</x>
-     <y>449</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
-=======
  <connections/>
->>>>>>> de9c65f (Implementacao de transformacoes geometricas)
 </ui>

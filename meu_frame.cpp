@@ -1,5 +1,6 @@
 #include "meu_frame.h"
 #include <QPainter>
+#include <iostream>
 
 using namespace std;
 
@@ -56,41 +57,6 @@ void Meu_frame::desenharDisplayFile(QPainter& painter){
     painter.restore();
  }
 
-<<<<<<< HEAD
-void Minha_Face::addLinha(double x1, double y1, double x2, double y2)
-{
-    arestas.push_back(Minha_Linha(x1, y1, x2, y2));
-}
-
-Meu_Objeto* Node::getObj()
-{
-    return obj;
-}
-
-Node* Node::getProx(){
-    return prox;
-}
-
-void Node::setProx(Node* obj){
-    prox = obj;
-}
-
-Node* DisplayFile::getCabeca(){
-    return cabeca;
-}
-
-DisplayFile::~DisplayFile(){
-    Node* atual = cabeca;
-    while(atual != nullptr){
-        Node* proximo = atual->getProx();
-        delete atual->getObj();
-        delete atual;
-        atual = proximo;
-    }
-}
-
-=======
->>>>>>> de9c65f (Implementacao de transformacoes geometricas)
 void DisplayFile::insertInicio(Meu_Objeto* obj)
 {
     Node* novo = new Node(obj);
