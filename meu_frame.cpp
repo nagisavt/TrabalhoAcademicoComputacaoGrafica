@@ -57,10 +57,4 @@ void Meu_frame::desenharDisplayFile(QPainter& painter){
     painter.restore();
  }
 
-void DisplayFile::insertInicio(Meu_Objeto* obj)
-{
-    Node* novo = new Node(obj);
-    novo->setProx(cabeca);
-    cabeca = novo;
-}
 
