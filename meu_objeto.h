@@ -5,6 +5,7 @@
 #include "qmath.h"
 #include "qpoint.h"
 #include <string>
+#include <vector>
 
 class Meu_Objeto {
 public:

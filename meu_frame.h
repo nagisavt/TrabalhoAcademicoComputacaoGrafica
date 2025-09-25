@@ -3,6 +3,7 @@
 
 
 #include "display_file.h"
+#include "window.h"
 #include <QFrame>
 #include <QWidget>
 #include <QPaintEvent>
@@ -18,10 +19,13 @@ class Meu_frame : public QFrame
 
 private:
     void desenharDisplayFile(QPainter& painter);
+    Window window;
 public:
     DisplayFile displayFile;
     explicit Meu_frame(QWidget *parent = nullptr);
+    Window& getWindow() { return window; }
     void paintEvent(QPaintEvent *event) override;
+
 
 public slots:
 

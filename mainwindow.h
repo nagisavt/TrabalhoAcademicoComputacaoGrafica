@@ -22,6 +22,14 @@ private slots:
     void on_btnTransladar_clicked();
     void on_btnEscalar_clicked();
     void on_btnRotacionar_clicked();
+    void on_btnPanCima_clicked();
+    void on_btnPanBaixo_clicked();
+    void on_btnPanEsquerda_clicked();
+    void on_btnPanDireita_clicked();
+    void on_btnZoomIn_clicked();
+    void on_btnZoomOut_clicked();
+    void on_btnGirarHorario_clicked();
+    void on_btnGirarAntiHorario_clicked();
 
 private:
     Ui::MainWindow *ui;

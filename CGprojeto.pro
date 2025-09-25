@@ -12,13 +12,15 @@ SOURCES += \
     display_file.cpp \
     main.cpp \
     mainwindow.cpp \
-    meu_frame.cpp
+    meu_frame.cpp \
+    window.cpp
 
 HEADERS += \
     display_file.h \
     mainwindow.h \
     meu_frame.h \
-    meu_objeto.h
+    meu_objeto.h \
+    window.h
 
 FORMS += \
     mainwindow.ui

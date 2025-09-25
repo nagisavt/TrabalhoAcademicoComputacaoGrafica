@@ -23,17 +23,21 @@ void Meu_frame::desenhar(){
 
 void Meu_frame::desenharDisplayFile(QPainter& painter){
     painter.save();
-    QTransform T;
-    T.translate(width()/2.0, height()/2.0);
-    T.scale(1.0, -1.0);
-    painter.setWorldTransform(T);
+
+    QTransform T_window = window.getTransformacao();
+    QTransform T_viewport;
+    T_viewport.scale(width() / 2.0, -height() / 2.0);
+    T_viewport.translate(1.0, -1.0);
+    QTransform T_final = T_viewport * T_window;
+    painter.setWorldTransform(T_final);
 
     Node* noAtual = displayFile.getCabeca();
     if(!noAtual){
-        cout<<"DisplayFile vazia..."<<endl;
+        // cout<<"DisplayFile vazia..."<<endl; // Opcional
+        painter.restore();
         return;
     }
-    cout <<"Desanhando objetos..."<<endl;
+    // cout <<"Desanhando objetos..."<<endl; // Opcional
 
     while (noAtual != nullptr){
         Meu_Objeto* obj = noAtual->getObj();
@@ -46,15 +50,15 @@ void Meu_frame::desenharDisplayFile(QPainter& painter){
             painter.drawLine(linha->p1.x, linha->p1.y, linha->p2.x, linha->p2.y);
         }
         else if(Minha_Face* face = dynamic_cast<Minha_Face*>(obj)){
-            painter.setPen(QPen(Qt::red, 2));
-            for(auto it = face->arestas.begin();it != face->arestas.end(); it++){
-                painter.setPen(QPen(Qt::red, 2));
-                painter.drawLine(it->p1.x, it->p1.y, it->p2.x, it->p2.y);
+            painter.setPen(QPen(Qt::blue, 2));
+            for(const auto& aresta : face->arestas){
+                painter.drawLine(aresta.p1.x, aresta.p1.y, aresta.p2.x, aresta.p2.y);
             }
         }
         noAtual = noAtual->getProx();
     }
+
     painter.restore();
- }
+}
 
 

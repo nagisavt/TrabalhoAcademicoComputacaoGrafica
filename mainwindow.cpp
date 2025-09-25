@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "meu_frame.h"
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -11,15 +12,17 @@ MainWindow::MainWindow(QWidget *parent)
     //PONTOS
     ui->Mundo->displayFile.insertInicio(new Meu_Ponto("p1",50, 50));
     ui->Mundo->displayFile.insertInicio(new Meu_Ponto("p2", 0, 0));
+    ui->Mundo->displayFile.insertInicio(new Meu_Ponto("p3",50, -50));
 
     //LINHAS
     ui->Mundo->displayFile.insertInicio(new Minha_Linha("l1",10,10,50,100));
+    ui->Mundo->displayFile.insertInicio(new Minha_Linha("l2",0,-230,240,0));
 
     //POLIGONOS
     Minha_Face* triangulo = new Minha_Face("f1");
-    triangulo->addLinha(150, 40, 250, 100);
-    triangulo->addLinha(250, 100, 200,150);
-    triangulo->addLinha(200, 150,150,40);
+    triangulo->addLinha(450, -210, 550, -150);
+    triangulo->addLinha(550, -150, 500, -100);
+    triangulo->addLinha(500, -100, 450, -210);
     ui->Mundo->displayFile.insertInicio(triangulo);
 
     Minha_Face* estrela = new Minha_Face("f2");
@@ -87,6 +90,66 @@ void MainWindow::on_btnRotacionar_clicked() {
 
     ui->Mundo->update();
 }
+
+void MainWindow::on_btnPanCima_clicked()
+{
+    ui->Mundo->getWindow().pan(0, -20.0);
+    //qDebug() << "Centro da Câmera movido para:" << ui->Mundo->getWindow().getCentro();
+    ui->Mundo->update();
+}
+
+void MainWindow::on_btnPanBaixo_clicked()
+{
+    ui->Mundo->getWindow().pan(0, 20.0);
+    ui->Mundo->update();
+}
+
+void MainWindow::on_btnPanEsquerda_clicked()
+{
+    ui->Mundo->getWindow().pan(-20.0, 0);
+    ui->Mundo->update();
+}
+
+void MainWindow::on_btnPanDireita_clicked()
+{
+    ui->Mundo->getWindow().pan(20.0, 0);
+    ui->Mundo->update();
+}
+
+
+// SLOTS PARA CONTROLE DE ZOOM
+
+void MainWindow::on_btnZoomIn_clicked()
+{
+    const double fatorZoom = 0.9;
+    ui->Mundo->getWindow().zoom(fatorZoom);
+    ui->Mundo->update();
+}
+
+void MainWindow::on_btnZoomOut_clicked()
+{
+    const double fatorZoom = 1.1;
+    ui->Mundo->getWindow().zoom(fatorZoom);
+    ui->Mundo->update();
+}
+
+
+// SLOTS PARA CONTROLE DE ROTAÇÃO DA CÂMERA
+
+void MainWindow::on_btnGirarHorario_clicked()
+{
+    const double angulo = -5.0;
+    ui->Mundo->getWindow().rotate(angulo);
+    ui->Mundo->update();
+}
+
+void MainWindow::on_btnGirarAntiHorario_clicked()
+{
+    const double angulo = 5.0;
+    ui->Mundo->getWindow().rotate(angulo);
+    ui->Mundo->update();
+}
+
 
 MainWindow::~MainWindow()
 {

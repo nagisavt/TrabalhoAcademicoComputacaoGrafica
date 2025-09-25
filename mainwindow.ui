@@ -222,12 +222,112 @@
     <item>
      <widget class="Meu_frame" name="Mundo">
       <property name="frameShape">
-       <enum>QFrame::Shape::Box</enum>
+       <enum>QFrame::NoFrame</enum>
       </property>
-      <property name="frameShadow">
-       <enum>QFrame::Shadow::Raised</enum>
-      </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_2"/>
+      <widget class="QPushButton" name="btnPanCima">
+       <property name="geometry">
+        <rect>
+         <x>550</x>
+         <y>460</y>
+         <width>41</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>CIMA</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnPanBaixo">
+       <property name="geometry">
+        <rect>
+         <x>550</x>
+         <y>520</y>
+         <width>41</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>BAIXO</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnPanEsquerda">
+       <property name="geometry">
+        <rect>
+         <x>520</x>
+         <y>490</y>
+         <width>41</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>ESQ</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnPanDireita">
+       <property name="geometry">
+        <rect>
+         <x>580</x>
+         <y>490</y>
+         <width>41</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>DIR</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnZoomIn">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>490</y>
+         <width>51</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Zoom +</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnZoomOut">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>520</y>
+         <width>51</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Zoom -</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnGirarHorario">
+       <property name="geometry">
+        <rect>
+         <x>480</x>
+         <y>0</y>
+         <width>71</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Horario</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnGirarAntiHorario">
+       <property name="geometry">
+        <rect>
+         <x>560</x>
+         <y>0</y>
+         <width>71</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>AntiHorario</string>
+       </property>
+      </widget>
      </widget>
     </item>
    </layout>
