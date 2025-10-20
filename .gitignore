@@ -1,0 +1,35 @@
+# Arquivos de build
+build/
+*.o
+*.obj
+*.dll
+*.so
+*.dylib
+*.exe
+
+# Arquivos do Qt Creator específicos de usuário
+*.pro.user
+*.pro.user.*
+*.qbs.user
+*.qbs.user.*
+
+# Arquivos de backup/temporários
+*.autosave
+*.swp
+*.bak
+*.tmp
+
+# Diretórios de cache do Qt
+.moc/
+.qrc/
+.ui/
+*.moc
+moc_*.cpp
+qrc_*.cpp
+ui_*.h
+
+# Logs
+*.log
+
+# Arquivos do Visual Studio Code (se usar)
+.vscode/
