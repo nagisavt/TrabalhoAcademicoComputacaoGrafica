@@ -13,13 +13,16 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     meu_frame.cpp \
+    read_obj.cpp \
     window.cpp
 
 HEADERS += \
+    clipping.h \
     display_file.h \
     mainwindow.h \
     meu_frame.h \
     meu_objeto.h \
+    read_obj.h \
     window.h
 
 FORMS += \

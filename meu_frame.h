@@ -1,7 +1,6 @@
 #ifndef MEU_FRAME_H
 #define MEU_FRAME_H
 
-
 #include "display_file.h"
 #include "window.h"
 #include <QFrame>

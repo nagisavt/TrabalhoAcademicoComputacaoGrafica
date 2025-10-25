@@ -1,7 +1,9 @@
 #include "window.h"
 
-Window::Window() : centro(0.0, 0.0), altura(500.0), angulo(0.0) {
-
+Window::Window() {
+    centro = QPointF(50.0, 150.0);
+    altura = 600.0;
+    angulo = 0.0;
 }
 
 void Window::pan(double dx, double dy) {
@@ -19,10 +21,9 @@ void Window::rotate(double degrees) {
 
 QTransform Window::getTransformacao() const {
     QTransform t;
-    t.translate(-centro.x(), -centro.y());
-    t.rotate(-angulo);
     double escala = 2.0 / altura;
     t.scale(escala, escala);
-
+    t.rotate(-angulo);
+    t.translate(-centro.x(), -centro.y());
     return t;
 }
