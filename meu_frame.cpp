@@ -38,6 +38,19 @@ void Meu_frame::desenharDisplayFile(QPainter& painter) {
             // Pontos: Vermelho se estiverem dentro, nada se estiverem fora
             painter.setPen(QPen(Qt::red, 8));
             QPointF p_mundo(ponto->x, ponto->y);
+
+            switch(m_projecao){
+                case TipoProjecao::XY:
+                    p_mundo = QPointF(ponto->x, ponto->y);
+                    break;
+                case TipoProjecao::XZ:
+                    p_mundo = QPointF(ponto->x, ponto->z);
+                    break;
+                case TipoProjecao::YZ:
+                    p_mundo = QPoint(ponto->y, ponto->z);
+                    break;
+            }
+
             QPointF p_norm = T_window.map(p_mundo);
 
             if (Recorte::calcularCodigo(p_norm) == Recorte::DENTRO) {
@@ -48,6 +61,22 @@ void Meu_frame::desenharDisplayFile(QPainter& painter) {
         else if (Minha_Linha* linha = dynamic_cast<Minha_Linha*>(obj)) {
             QPointF p1_mundo(linha->p1.x, linha->p1.y);
             QPointF p2_mundo(linha->p2.x, linha->p2.y);
+
+            switch (m_projecao) {
+                case TipoProjecao::XY: // Frontal
+                    p1_mundo = QPointF(linha->p1.x, linha->p1.y);
+                    p2_mundo = QPointF(linha->p2.x, linha->p2.y);
+                    break;
+                case TipoProjecao::XZ: // Superior
+                    p1_mundo = QPointF(linha->p1.x, linha->p1.z);
+                    p2_mundo = QPointF(linha->p2.x, linha->p2.z);
+                    break;
+                case TipoProjecao::YZ: // Lateral
+                    p1_mundo = QPointF(linha->p1.z, linha->p1.y);
+                    p2_mundo = QPointF(linha->p2.z, linha->p2.y);
+                    break;
+            }
+
             QPointF p1_norm = T_window.map(p1_mundo);
             QPointF p2_norm = T_window.map(p2_mundo);
 
@@ -70,6 +99,22 @@ void Meu_frame::desenharDisplayFile(QPainter& painter) {
             for (const auto& aresta : face->vertices) {
                 QPointF p1_mundo(aresta.p1.x, aresta.p1.y);
                 QPointF p2_mundo(aresta.p2.x, aresta.p2.y);
+
+                switch (m_projecao) {
+                    case TipoProjecao::XY: // Frontal
+                        p1_mundo = QPointF(linha->p1.x, linha->p1.y);
+                        p2_mundo = QPointF(linha->p2.x, linha->p2.y);
+                        break;
+                    case TipoProjecao::XZ: // Superior
+                        p1_mundo = QPointF(linha->p1.x, linha->p1.z);
+                        p2_mundo = QPointF(linha->p2.x, linha->p2.z);
+                        break;
+                    case TipoProjecao::YZ: // Lateral
+                        p1_mundo = QPointF(linha->p1.z, linha->p1.y);
+                        p2_mundo = QPointF(linha->p2.z, linha->p2.y);
+                        break;
+                    }
+
                 QPointF p1_norm = T_window.map(p1_mundo);
                 QPointF p2_norm = T_window.map(p2_mundo);
 

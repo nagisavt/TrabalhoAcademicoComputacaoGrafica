@@ -16,15 +16,27 @@ class Meu_frame : public QFrame
 {
     Q_OBJECT
 
+public:
+    enum class TipoProjecao{
+        XY,
+        XZ,
+        YZ
+
+    };
 private:
     void desenharDisplayFile(QPainter& painter);
     Window window;
+    TipoProjecao m_projecao = TipoProjecao::XY;
 public:
     DisplayFile displayFile;
     explicit Meu_frame(QWidget *parent = nullptr);
     Window& getWindow() { return window; }
     void paintEvent(QPaintEvent *event) override;
 
+    void setProjecao(TipoProjecao proj){
+        m_projecao = proj;
+        update();
+    }
 
 public slots:
 

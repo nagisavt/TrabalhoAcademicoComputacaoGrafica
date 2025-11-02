@@ -90,7 +90,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->btnTransladar, &QPushButton::clicked, this, &MainWindow::on_btnTransladar_clicked);
     connect(ui->btnEscalar, &QPushButton::clicked, this, &MainWindow::on_btnEscalar_clicked);
-    connect(ui->btnRotacionar, &QPushButton::clicked, this, &MainWindow::on_btnRotacionar_clicked);
+    connect(ui->btnRotacionar, &QPushButton::clicked, this, &MainWindow::on_btnRotacionarX_clicked);
+    connect(ui->btnRotacionar, &QPushButton::clicked, this, &MainWindow::on_btnRotacionarY_clicked);
+    connect(ui->btnRotacionar, &QPushButton::clicked, this, &MainWindow::on_btnRotacionarZ_clicked);
 
 }
 
@@ -108,10 +110,11 @@ void MainWindow::on_btnTransladar_clicked() {
 
     const double dx = ui->spinDx->value();
     const double dy = ui->spinDy->value();
+    const double dz = ui->spinDz->value();
     Meu_Objeto* obj = ui->Mundo->displayFile.findByName(sel.toStdString());
     if (!obj) return;
 
-    obj->translada(dx, dy);
+    obj->translada(dx, dy, dz);
 
     ui->Mundo->update();
 }
@@ -122,16 +125,17 @@ void MainWindow::on_btnEscalar_clicked() {
 
     const double sx = ui->spinSx->value();
     const double sy = ui->spinSy->value();
+    const double sz = ui->spinSz->value();
     if (sx == 0.0 || sy == 0.0) return;
 
     Meu_Objeto* obj = ui->Mundo->displayFile.findByName(sel.toStdString());
     if (!obj) return;
-    obj->escalaNoCentro(sx, sy);
+    obj->escalaNoCentro(sx, sy, sz);
 
     ui->Mundo->update();
 }
 
-void MainWindow::on_btnRotacionar_clicked() {
+void MainWindow::on_btnRotacionarX_clicked() {
     const QString sel = ui->comboObjetos->currentText();
     if (sel.isEmpty()) return;
 
@@ -139,7 +143,33 @@ void MainWindow::on_btnRotacionar_clicked() {
 
     Meu_Objeto* obj = ui->Mundo->displayFile.findByName(sel.toStdString());
     if (!obj) return;
-    obj->rotacionaNoCentro(ang);
+    obj->rotacionaXNoCentro(ang);
+
+    ui->Mundo->update();
+}
+
+void MainWindow::on_btnRotacionarY_clicked() {
+    const QString sel = ui->comboObjetos->currentText();
+    if (sel.isEmpty()) return;
+
+    double ang = ui->spinAng->value();
+
+    Meu_Objeto* obj = ui->Mundo->displayFile.findByName(sel.toStdString());
+    if (!obj) return;
+    obj->rotacionaYNoCentro(ang);
+
+    ui->Mundo->update();
+}
+
+void MainWindow::on_btnRotacionarZ_clicked() {
+    const QString sel = ui->comboObjetos->currentText();
+    if (sel.isEmpty()) return;
+
+    double ang = ui->spinAng->value();
+
+    Meu_Objeto* obj = ui->Mundo->displayFile.findByName(sel.toStdString());
+    if (!obj) return;
+    obj->rotacionaZNoCentro(ang);
 
     ui->Mundo->update();
 }
@@ -202,6 +232,23 @@ void MainWindow::on_btnGirarAntiHorario_clicked()
     ui->Mundo->update();
 }
 
+void MainWindow::on_btnProjecaoXY_clicked()
+{
+    // Diz ao 'Mundo' (Meu_frame) para usar a projeção XY
+    ui->Mundo->setProjecao(Meu_frame::TipoProjecao::XY);
+}
+
+void MainWindow::on_btnProjecaoZX_clicked()
+{
+    // Diz ao 'Mundo' (Meu_frame) para usar a projeção ZX (Superior)
+    ui->Mundo->setProjecao(Meu_frame::TipoProjecao::XZ);
+}
+
+void MainWindow::on_btnProjecaoZY_clicked()
+{
+    // Diz ao 'Mundo' (Meu_frame) para usar a projeção ZY (Lateral)
+    ui->Mundo->setProjecao(Meu_frame::TipoProjecao::YZ);
+}
 
 MainWindow::~MainWindow()
 {
