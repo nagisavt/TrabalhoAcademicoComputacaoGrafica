@@ -18,6 +18,8 @@ public:
     Node* cabeca = nullptr;
     void insertInicio(Meu_Objeto* obj);
 
+    ~DisplayFile();
+
     Node* getCabeca() const { return cabeca; }
 
     Meu_Objeto* findByName(const std::string& nome) const {

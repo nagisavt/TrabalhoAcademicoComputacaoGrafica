@@ -102,6 +102,8 @@ public:
 
     Minha_Linha(std::string n, double x1, double y1, double z1, double x2, double y2, double z2)
         : nome(std::move(n)), p1("p1", x1, y1, z1), p2("p2", x2, y2, z2) {}
+    Minha_Linha(Meu_Ponto p1, Meu_Ponto p2)
+        :nome(""), p1("", p1.x, p1.y, p1.z), p2("", p2.x, p2.y, p2.z) {}
 
     const std::string& getNome() const override { return nome; }
     void translada(double dx, double dy, double dz) override { p1.translada(dx,dy,dz); p2.translada(dx,dy,dz); }
@@ -132,22 +134,22 @@ public:
 class Minha_Face : public Meu_Objeto {
     std::string nome;
 public:
-    std::vector<Minha_Linha> vertices;
+    std::vector<Minha_Linha> arestas;
 
     explicit Minha_Face(std::string n) : nome(std::move(n)) {}
 
     void addLinha(double x1, double y1, double z1, double x2, double y2, double z2) {
-        vertices.emplace_back("v", x1, y1, z1, x2, y2, z2);
+        arestas.emplace_back("", x1, y1, z1, x2, y2, z2);
     }
 
     const std::string& getNome() const override { return nome; }
     void translada(double dx, double dy, double dz) override {
-        for (auto& a : vertices) a.translada(dx, dy, dz);
+        for (auto& a : arestas) a.translada(dx, dy, dz);
     }
 
     QVector3D centro() const override {
         double sx = 0.0, sy = 0.0, sz = 0.0; int n = 0;
-        for (const auto& a : vertices) {
+        for (const auto& a : arestas) {
             sx += a.p1.x; sy += a.p1.y; sz += a.p1.z; ++n;
             sx += a.p2.x; sy += a.p2.y; sz += a.p2.z;++n;
         }
@@ -156,24 +158,28 @@ public:
     }
 
     void escala(double sx, double sy, double sz, double cx, double cy, double cz) override {
-        for (auto& a : vertices) {
+        for (auto& a : arestas) {
             a.escala(sx, sy, sz, cx, cy, cz);
         }
     }
     void rotacionaX(double angGraus, double cx, double cy, double cz) override {
-        for (auto& a : vertices) {
+        for (auto& a : arestas) {
             a.rotacionaX(angGraus, cx, cy, cz);
         }
     }
     void rotacionaY(double angGraus, double cx, double cy, double cz) override {
-        for (auto& a : vertices) {
+        for (auto& a : arestas) {
             a.rotacionaY(angGraus, cx, cy, cz);
         }
     }
     void rotacionaZ(double angGraus, double cx, double cy, double cz) override {
-        for (auto& a : vertices) {
+        for (auto& a : arestas) {
             a.rotacionaZ(angGraus, cx, cy, cz);
         }
+    }
+    void setNome(QString newNome){
+        std::string str = newNome.toStdString();
+        nome = str;
     }
 };
 

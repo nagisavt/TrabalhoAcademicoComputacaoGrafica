@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "meu_frame.h"
 #include <QDebug>
+#include "read_obj.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -86,14 +87,24 @@ MainWindow::MainWindow(QWidget *parent)
     ui->Mundo->displayFile.insertInicio(new Meu_Ponto("estrela3", 50, 450, 0));
     ui->Mundo->displayFile.insertInicio(new Meu_Ponto("estrela4", 400, 380, 0));
 
+    Minha_Face* umbreon = m_objloader.loadObj("UmbreonLowPoly.obj");
+    if(umbreon){
+        ui->Mundo->displayFile.insertInicio(umbreon);
+    }else{
+        qDebug() << "Não foi possivel criar o .obj";
+    }
+    umbreon->escala(30,30,30, 0, 0, 0);
+    umbreon->translada(-10,40,0);
+    Minha_Face* gengar = m_objloader.loadObj("HAUNTER_pokemon.obj");
+    if(umbreon){
+        ui->Mundo->displayFile.insertInicio(gengar);
+    }else{
+        qDebug() << "Não foi possivel criar o .obj";
+    }
+    gengar->escala(20,20,30, 0, 0, 0);
+    gengar->translada(350,140,0);
+
     preencherListaObjetos();
-
-    connect(ui->btnTransladar, &QPushButton::clicked, this, &MainWindow::on_btnTransladar_clicked);
-    connect(ui->btnEscalar, &QPushButton::clicked, this, &MainWindow::on_btnEscalar_clicked);
-    connect(ui->btnRotacionar, &QPushButton::clicked, this, &MainWindow::on_btnRotacionarX_clicked);
-    connect(ui->btnRotacionar, &QPushButton::clicked, this, &MainWindow::on_btnRotacionarY_clicked);
-    connect(ui->btnRotacionar, &QPushButton::clicked, this, &MainWindow::on_btnRotacionarZ_clicked);
-
 }
 
 void MainWindow::preencherListaObjetos() {
@@ -238,13 +249,13 @@ void MainWindow::on_btnProjecaoXY_clicked()
     ui->Mundo->setProjecao(Meu_frame::TipoProjecao::XY);
 }
 
-void MainWindow::on_btnProjecaoZX_clicked()
+void MainWindow::on_btnProjecaoXZ_clicked()
 {
     // Diz ao 'Mundo' (Meu_frame) para usar a projeção ZX (Superior)
     ui->Mundo->setProjecao(Meu_frame::TipoProjecao::XZ);
 }
 
-void MainWindow::on_btnProjecaoZY_clicked()
+void MainWindow::on_btnProjecaoYZ_clicked()
 {
     // Diz ao 'Mundo' (Meu_frame) para usar a projeção ZY (Lateral)
     ui->Mundo->setProjecao(Meu_frame::TipoProjecao::YZ);

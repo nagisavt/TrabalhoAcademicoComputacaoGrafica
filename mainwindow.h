@@ -1,8 +1,9 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "read_obj.h"
 #include <QMainWindow>
-#include <QString>
+#include <Qstring>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -39,11 +40,12 @@ private slots:
     void on_btnGirarAntiHorario_clicked();
 
     void on_btnProjecaoXY_clicked();
-    void on_btnProjecaoZX_clicked();
-    void on_btnProjecaoZY_clicked();
+    void on_btnProjecaoXZ_clicked();
+    void on_btnProjecaoYZ_clicked();
 
 private:
     Ui::MainWindow *ui;
     void preencherListaObjetos();
+    read_obj m_objloader;
 };
 #endif // MAINWINDOW_H

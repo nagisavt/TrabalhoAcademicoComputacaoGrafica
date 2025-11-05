@@ -8,8 +8,8 @@ class read_obj
 {
 public:
     read_obj() =  default;
-
-    Minha_Face* load(const QString& filename);
+    int parser(const std::string token);
+    Minha_Face *loadObj(const QString& filename);
 
     const std::string& getError() const { return m_error; }
 private:

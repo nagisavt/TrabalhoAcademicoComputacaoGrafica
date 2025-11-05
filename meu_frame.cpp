@@ -95,23 +95,22 @@ void Meu_frame::desenharDisplayFile(QPainter& painter) {
             }
         }
         else if (Minha_Face* face = dynamic_cast<Minha_Face*>(obj)) {
-            // Faremos a mesma lógica para CADA aresta da face
-            for (const auto& aresta : face->vertices) {
+            for (const auto& aresta : face->arestas) {
                 QPointF p1_mundo(aresta.p1.x, aresta.p1.y);
                 QPointF p2_mundo(aresta.p2.x, aresta.p2.y);
 
                 switch (m_projecao) {
                     case TipoProjecao::XY: // Frontal
-                        p1_mundo = QPointF(linha->p1.x, linha->p1.y);
-                        p2_mundo = QPointF(linha->p2.x, linha->p2.y);
+                        p1_mundo = QPointF(aresta.p1.x, aresta.p1.y);
+                        p2_mundo = QPointF(aresta.p2.x, aresta.p2.y);
                         break;
                     case TipoProjecao::XZ: // Superior
-                        p1_mundo = QPointF(linha->p1.x, linha->p1.z);
-                        p2_mundo = QPointF(linha->p2.x, linha->p2.z);
+                        p1_mundo = QPointF(aresta.p1.x, aresta.p1.z);
+                        p2_mundo = QPointF(aresta.p2.x, aresta.p2.z);
                         break;
                     case TipoProjecao::YZ: // Lateral
-                        p1_mundo = QPointF(linha->p1.z, linha->p1.y);
-                        p2_mundo = QPointF(linha->p2.z, linha->p2.y);
+                        p1_mundo = QPointF(aresta.p1.z, aresta.p1.y);
+                        p2_mundo = QPointF(aresta.p2.z, aresta.p2.y);
                         break;
                     }
 
