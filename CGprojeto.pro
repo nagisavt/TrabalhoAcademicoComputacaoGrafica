@@ -17,7 +17,6 @@ SOURCES += \
     window.cpp
 
 HEADERS += \
-    clipping.h \
     display_file.h \
     mainwindow.h \
     meu_frame.h \

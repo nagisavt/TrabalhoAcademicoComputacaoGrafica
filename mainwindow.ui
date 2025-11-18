@@ -72,32 +72,6 @@
         <string>DIR</string>
        </property>
       </widget>
-      <widget class="QPushButton" name="btnGirarHorario">
-       <property name="geometry">
-        <rect>
-         <x>480</x>
-         <y>0</y>
-         <width>71</width>
-         <height>24</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Horario</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="btnGirarAntiHorario">
-       <property name="geometry">
-        <rect>
-         <x>560</x>
-         <y>0</y>
-         <width>71</width>
-         <height>24</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>AntiHorario</string>
-       </property>
-      </widget>
       <widget class="QWidget" name="widget" native="true">
        <property name="geometry">
         <rect>
@@ -452,6 +426,97 @@
        </property>
        <property name="text">
         <string>YZ</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnHorZ">
+       <property name="geometry">
+        <rect>
+         <x>570</x>
+         <y>40</y>
+         <width>71</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>HorarioZ</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnAntiZ">
+       <property name="geometry">
+        <rect>
+         <x>640</x>
+         <y>40</y>
+         <width>71</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>AntiZ</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnProjecaoPerspectiva">
+       <property name="geometry">
+        <rect>
+         <x>690</x>
+         <y>60</y>
+         <width>91</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Perspectiva</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnHorY">
+       <property name="geometry">
+        <rect>
+         <x>570</x>
+         <y>20</y>
+         <width>71</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>HorarioY</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnHorX">
+       <property name="geometry">
+        <rect>
+         <x>570</x>
+         <y>0</y>
+         <width>71</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>HorarioX</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnAntiY">
+       <property name="geometry">
+        <rect>
+         <x>640</x>
+         <y>20</y>
+         <width>71</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>AntiY</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnGirarAntiHorario_3">
+       <property name="geometry">
+        <rect>
+         <x>640</x>
+         <y>0</y>
+         <width>71</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>AntiX</string>
        </property>
       </widget>
      </widget>

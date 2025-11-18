@@ -93,18 +93,25 @@ MainWindow::MainWindow(QWidget *parent)
     }else{
         qDebug() << "Não foi possivel criar o .obj";
     }
-    umbreon->escala(30,30,30, 0, 0, 0);
+    umbreon->escalaNoCentro(30,30,30);
     umbreon->translada(-10,40,0);
+
     Minha_Face* gengar = m_objloader.loadObj("HAUNTER_pokemon.obj");
     if(umbreon){
         ui->Mundo->displayFile.insertInicio(gengar);
     }else{
         qDebug() << "Não foi possivel criar o .obj";
     }
-    gengar->escala(20,20,30, 0, 0, 0);
+    gengar->escalaNoCentro(20,20,30);
     gengar->translada(350,140,0);
 
     preencherListaObjetos();
+}
+
+Meu_Objeto* MainWindow::getObjetoSelecionado() {
+    const QString sel = ui->comboObjetos->currentText();
+    if (sel.isEmpty()) return nullptr;
+    return ui->Mundo->displayFile.findByName(sel.toStdString());
 }
 
 void MainWindow::preencherListaObjetos() {
@@ -185,6 +192,46 @@ void MainWindow::on_btnRotacionarZ_clicked() {
     ui->Mundo->update();
 }
 
+void MainWindow::on_btnAntiX_clicked()
+{
+    const double angulo = 5.0;
+    ui->Mundo->getWindow().rotateX(angulo);
+    ui->Mundo->update();
+}
+
+void MainWindow::on_btnHorX_clicked()
+{
+    const double angulo = -5.0;
+    ui->Mundo->getWindow().rotateX(angulo);
+    ui->Mundo->update();
+}
+
+void MainWindow::on_btnAntiY_clicked()
+{
+    const double angulo = 5.0;
+    ui->Mundo->getWindow().rotateY(angulo);
+    ui->Mundo->update();
+}
+
+void MainWindow::on_btnHorY_clicked()
+{
+    const double angulo = -5.0;
+    ui->Mundo->getWindow().rotateY(angulo);
+    ui->Mundo->update();
+}
+
+void MainWindow::on_btnAntiZ_clicked() {
+    const double angulo = 5.0;
+    ui->Mundo->getWindow().rotateZ(angulo);
+    ui->Mundo->update();
+}
+
+void MainWindow::on_btnHorZ_clicked() {
+    const double angulo = -5.0;
+    ui->Mundo->getWindow().rotateZ(angulo);
+    ui->Mundo->update();
+}
+
 void MainWindow::on_btnPanCima_clicked()
 {
     ui->Mundo->getWindow().pan(0, 25.0);
@@ -209,9 +256,6 @@ void MainWindow::on_btnPanDireita_clicked()
     ui->Mundo->update();
 }
 
-
-// SLOTS PARA CONTROLE DE ZOOM
-
 void MainWindow::on_btnZoomIn_clicked()
 {
     const double fatorZoom = 0.9;
@@ -226,39 +270,25 @@ void MainWindow::on_btnZoomOut_clicked()
     ui->Mundo->update();
 }
 
-
-// SLOTS PARA CONTROLE DE ROTAÇÃO DA CÂMERA
-
-void MainWindow::on_btnGirarHorario_clicked()
-{
-    const double angulo = -5.0;
-    ui->Mundo->getWindow().rotate(angulo);
-    ui->Mundo->update();
-}
-
-void MainWindow::on_btnGirarAntiHorario_clicked()
-{
-    const double angulo = 5.0;
-    ui->Mundo->getWindow().rotate(angulo);
-    ui->Mundo->update();
-}
-
 void MainWindow::on_btnProjecaoXY_clicked()
 {
-    // Diz ao 'Mundo' (Meu_frame) para usar a projeção XY
     ui->Mundo->setProjecao(Meu_frame::TipoProjecao::XY);
 }
 
 void MainWindow::on_btnProjecaoXZ_clicked()
 {
-    // Diz ao 'Mundo' (Meu_frame) para usar a projeção ZX (Superior)
     ui->Mundo->setProjecao(Meu_frame::TipoProjecao::XZ);
 }
 
 void MainWindow::on_btnProjecaoYZ_clicked()
 {
-    // Diz ao 'Mundo' (Meu_frame) para usar a projeção ZY (Lateral)
     ui->Mundo->setProjecao(Meu_frame::TipoProjecao::YZ);
+}
+
+void MainWindow::on_btnProjecaoPerspectiva_clicked()
+{
+    qDebug() << "Mudando para Projeção em Perspectiva";
+    ui->Mundo->setProjecao(Meu_frame::TipoProjecao::PERSPECTIVA);
 }
 
 MainWindow::~MainWindow()

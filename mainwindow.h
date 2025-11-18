@@ -36,14 +36,21 @@ private slots:
     void on_btnZoomIn_clicked();
     void on_btnZoomOut_clicked();
 
-    void on_btnGirarHorario_clicked();
-    void on_btnGirarAntiHorario_clicked();
+    void on_btnHorX_clicked();
+    void on_btnAntiX_clicked();
+    void on_btnHorY_clicked();
+    void on_btnAntiY_clicked();
+    void on_btnHorZ_clicked();
+    void on_btnAntiZ_clicked();
+
 
     void on_btnProjecaoXY_clicked();
     void on_btnProjecaoXZ_clicked();
     void on_btnProjecaoYZ_clicked();
+    void on_btnProjecaoPerspectiva_clicked();
 
 private:
+    Meu_Objeto* getObjetoSelecionado();
     Ui::MainWindow *ui;
     void preencherListaObjetos();
     read_obj m_objloader;

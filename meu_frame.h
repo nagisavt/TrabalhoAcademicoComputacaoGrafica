@@ -20,13 +20,15 @@ public:
     enum class TipoProjecao{
         XY,
         XZ,
-        YZ
+        YZ,
+        PERSPECTIVA
 
     };
 private:
     void desenharDisplayFile(QPainter& painter);
     Window window;
-    TipoProjecao m_projecao = TipoProjecao::XY;
+    TipoProjecao m_projecao = TipoProjecao::PERSPECTIVA;
+    double d = 500.0;
 public:
     DisplayFile displayFile;
     explicit Meu_frame(QWidget *parent = nullptr);

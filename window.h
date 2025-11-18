@@ -1,8 +1,8 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
-#include <QTransform>
-#include <QPointF>
+#include <QMatrix4x4>
+#include <QVector3D>
 
 class Window {
 public:
@@ -11,15 +11,19 @@ public:
     //MANipular a Windows
     void pan(double dx, double dy);
     void zoom(double factor);
-    void rotate(double degrees);
 
-    QTransform getTransformacao() const;
-    QPointF getCentro() const { return centro; }
+    void rotateX(double degrees);
+    void rotateY(double degrees);
+    void rotateZ(double degrees);
+
+    QMatrix4x4 getViewMatrix() const;
+
+    QVector3D getCentro() const { return centro; }
 
 private:
-    QPointF centro;
+    QVector3D centro;
+    QVector3D rotacao;
     double altura;
-    double angulo;
 };
 
 #endif // WINDOW_H

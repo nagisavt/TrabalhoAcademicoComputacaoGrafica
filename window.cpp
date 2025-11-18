@@ -1,9 +1,9 @@
 #include "window.h"
 
 Window::Window() {
-    centro = QPointF(50.0, 150.0);
+    centro = QVector3D(50.0, 150.0, 0.0);
+    rotacao = QVector3D(0.0, 0.0, 0.0);
     altura = 600.0;
-    angulo = 0.0;
 }
 
 void Window::pan(double dx, double dy) {
@@ -15,15 +15,25 @@ void Window::zoom(double factor) {
     altura *= factor;
 }
 
-void Window::rotate(double degrees) {
-    angulo += degrees;
+void Window::rotateX(double degrees) {
+    rotacao.setX(rotacao.x() + degrees);
 }
 
-QTransform Window::getTransformacao() const {
-    QTransform t;
+void Window::rotateY(double degrees) {
+    rotacao.setY(rotacao.y() + degrees);
+}
+
+void Window::rotateZ(double degrees) {
+    rotacao.setZ(rotacao.z() + degrees);
+}
+
+QMatrix4x4 Window::getViewMatrix() const {
+    QMatrix4x4 mat;
     double escala = 2.0 / altura;
-    t.scale(escala, escala);
-    t.rotate(-angulo);
-    t.translate(-centro.x(), -centro.y());
-    return t;
+    mat.scale(escala, -escala, escala);
+    mat.rotate(rotacao.x(), 1, 0, 0);
+    mat.rotate(rotacao.y(), 0, 1, 0);
+    mat.rotate(rotacao.z(), 0, 0, 1);
+    mat.translate(-centro.x(), -centro.y(), -centro.z());
+    return mat;
 }
