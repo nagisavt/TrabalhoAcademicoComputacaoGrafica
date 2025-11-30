@@ -506,7 +506,7 @@
         <string>AntiY</string>
        </property>
       </widget>
-      <widget class="QPushButton" name="btnGirarAntiHorario_3">
+      <widget class="QPushButton" name="btnAntiX">
        <property name="geometry">
         <rect>
          <x>640</x>

@@ -1,28 +1,31 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
-#include <QMatrix4x4>
-#include <QVector3D>
+#include <QPointF>
+#include "Mat.h"
 
 class Window {
 public:
     Window();
 
-    //MANipular a Windows
-    void pan(double dx, double dy);
+    void pan(double dx, double dy, double dz);
     void zoom(double factor);
 
     void rotateX(double degrees);
     void rotateY(double degrees);
     void rotateZ(double degrees);
 
-    QMatrix4x4 getViewMatrix() const;
+    void ajustarAspectRatio(double ratio);
 
-    QVector3D getCentro() const { return centro; }
+    Matriz4x4 getViewMatriz() const;
 
 private:
-    QVector3D centro;
-    QVector3D rotacao;
+
+    double camX, camY, camZ;
+
+    double angX, angY, angZ;
+
+    double largura;
     double altura;
 };
 

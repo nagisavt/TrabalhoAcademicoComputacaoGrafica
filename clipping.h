@@ -5,14 +5,12 @@
 
 namespace Recorte {
 
-// Regiões (Códigos binários)
 const int DENTRO = 0;   // 0000
 const int ESQUERDA = 1; // 0001
 const int DIREITA  = 2; // 0010
 const int BAIXO = 4;    // 0100
 const int CIMA = 8;     // 1000
 
-// Agora passamos os limites como argumento
 inline int calcularCodigo(double x, double y, double xMin, double yMin, double xMax, double yMax) {
     int codigo = DENTRO;
 
@@ -39,7 +37,6 @@ enum ResultadoRecorte {
     ACEITAR_RECORTADO
 };
 
-// Função principal agora recebe o tamanho da janela
 inline ResultadoRecorte recortarLinhaCohenSutherland(QPointF& p1, QPointF& p2, double xMin, double yMin, double xMax, double yMax) {
     int codigo1 = calcularCodigo(p1, xMin, yMin, xMax, yMax);
     int codigo2 = calcularCodigo(p2, xMin, yMin, xMax, yMax);
@@ -47,15 +44,12 @@ inline ResultadoRecorte recortarLinhaCohenSutherland(QPointF& p1, QPointF& p2, d
 
     while (true) {
         if ((codigo1 | codigo2) == DENTRO) {
-            // Totalmente dentro
             if (foiRecortado) return ACEITAR_RECORTADO;
             else return ACEITAR_TRIVIAL;
 
         } else if ((codigo1 & codigo2) != DENTRO) {
-            // Totalmente fora (na mesma região)
             return REJEITAR;
         } else {
-            // Precisa recortar
             foiRecortado = true;
 
             int codigoFora = (codigo1 != DENTRO) ? codigo1 : codigo2;
@@ -63,7 +57,6 @@ inline ResultadoRecorte recortarLinhaCohenSutherland(QPointF& p1, QPointF& p2, d
             double x1 = p1.x(), y1 = p1.y();
             double x2 = p2.x(), y2 = p2.y();
 
-            // Fórmulas de interseção usando os limites passados
             if (codigoFora & CIMA) {
                 x = x1 + (x2 - x1) * (yMax - y1) / (y2 - y1);
                 y = yMax;

@@ -28,7 +28,7 @@ private:
     void desenharDisplayFile(QPainter& painter);
     Window window;
     TipoProjecao m_projecao = TipoProjecao::PERSPECTIVA;
-    double d = 500.0;
+    double d = 300.0;
 public:
     DisplayFile displayFile;
     explicit Meu_frame(QWidget *parent = nullptr);

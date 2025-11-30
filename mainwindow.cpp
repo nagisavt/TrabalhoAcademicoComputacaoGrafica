@@ -10,102 +10,144 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    // CHAO
-    ui->Mundo->displayFile.insertInicio(new Minha_Linha("chao", -500, 0, 0,500, 0, 0));
+    ui->Mundo->displayFile.insertInicio(new Minha_Linha("chao", -500, 0, 0, 500, 0, 0));
+
+    Minha_Face* casa3D = new Minha_Face("casa_3d");
+
+    double zFrente = 0.0;
+    double zFundo = 200.0; // Profundidade da casa
+
+    // --- PAREDES (CUBO) ---
+
+    // Face Frontal (Z = 0)
+    casa3D->addLinha(100, 0, zFrente, 300, 0, zFrente);     // Chão
+    casa3D->addLinha(300, 0, zFrente, 300, 200, zFrente);   // Dir
+    casa3D->addLinha(300, 200, zFrente, 100, 200, zFrente); // Teto
+    casa3D->addLinha(100, 200, zFrente, 100, 0, zFrente);   // Esq
+
+    // Face Traseira (Z = 200)
+    casa3D->addLinha(100, 0, zFundo, 300, 0, zFundo);       // Chão
+    casa3D->addLinha(300, 0, zFundo, 300, 200, zFundo);     // Dir
+    casa3D->addLinha(300, 200, zFundo, 100, 200, zFundo);   // Teto
+    casa3D->addLinha(100, 200, zFundo, 100, 0, zFundo);     // Esq
+
+    // Conexões (Laterais que ligam frente ao fundo)
+    casa3D->addLinha(100, 0, zFrente, 100, 0, zFundo);      // Rodapé Esq
+    casa3D->addLinha(300, 0, zFrente, 300, 0, zFundo);      // Rodapé Dir
+    casa3D->addLinha(300, 200, zFrente, 300, 200, zFundo);  // Calha Dir
+    casa3D->addLinha(100, 200, zFrente, 100, 200, zFundo);  // Calha Esq
 
 
-    // CASA
-    // Base
-    Minha_Face* casaBase = new Minha_Face("casa_base");
-    casaBase->addLinha(100, 0, 0,300, 0, 0);   // Chão da casa
-    casaBase->addLinha(300, 0, 0,300, 200, 0); // Parede direita
-    casaBase->addLinha(300, 200, 0,100, 200, 0); // Teto (base do telhado)
-    casaBase->addLinha(100, 200, 0,100, 0, 0);   // Parede esquerda
-    ui->Mundo->displayFile.insertInicio(casaBase);
+    // --- TELHADO (PRISMA TRIANGULAR) ---
 
-    // Telhado
-    Minha_Face* telhado = new Minha_Face("casa_telhado");
-    telhado->addLinha(100, 200, 0,300, 200, 0);
-    telhado->addLinha(300, 200, 0,200, 280, 0); // Ponta do telhado
-    telhado->addLinha(200, 280, 0, 100, 200, 0);
-    ui->Mundo->displayFile.insertInicio(telhado);
+    // Triângulo Frente
+    casa3D->addLinha(100, 200, zFrente, 200, 300, zFrente); // Subida
+    casa3D->addLinha(200, 300, zFrente, 300, 200, zFrente); // Descida
 
-    // Porta
-    Minha_Face* porta = new Minha_Face("casa_porta");
-    porta->addLinha(130, 0, 0, 170, 0, 0);
-    porta->addLinha(170, 0, 0, 170, 120, 0);
-    porta->addLinha(170, 120, 0, 130, 120, 0);
-    porta->addLinha(130, 120, 0, 130, 0, 0);
-    ui->Mundo->displayFile.insertInicio(porta);
+    // Triângulo Fundo
+    casa3D->addLinha(100, 200, zFundo, 200, 300, zFundo);   // Subida
+    casa3D->addLinha(200, 300, zFundo, 300, 200, zFundo);   // Descida
 
-    // Janela
-    Minha_Face* janela = new Minha_Face("casa_janela");
-    janela->addLinha(220, 80, 0, 280, 80, 0);
-    janela->addLinha(280, 80, 0, 280, 140, 0);
-    janela->addLinha(280, 140, 0, 220, 140, 0);
-    janela->addLinha(220, 140, 0, 220, 80, 0);
-    ui->Mundo->displayFile.insertInicio(janela);
+    // Conexão do Cume (Topo do telhado)
+    casa3D->addLinha(200, 300, zFrente, 200, 300, zFundo);
 
-    // Vidros
-    ui->Mundo->displayFile.insertInicio(new Minha_Linha("janela_vidro_v", 250, 80, 0, 250, 140, 0)); // Vertical
-    ui->Mundo->displayFile.insertInicio(new Minha_Linha("janela_vidro_h", 220, 110, 0, 280, 110, 0)); // Horizontal
+    // Inserir na lista
+    ui->Mundo->displayFile.insertInicio(casa3D);
+    casa3D->translada(0,0,-60);
+
+    // =========================================================
+    // 5. ÁRVORE (Tronco + Copa)
+    // =========================================================
+    Minha_Face* arvore = new Minha_Face("arvore");
+
+    // Posição da árvore (ao lado da casa)
+    double ax = -200, az = 50;
+
+    // --- Tronco (Prisma retangular alto) ---
+    double largTronco = 30;
+    double altTronco = 150;
+    double zTronco = largTronco; // Tronco quadrado na base
+
+    // Coordenadas baseadas no centro (ax, az)
+    double tX1 = ax,           tZ1 = az;
+    double tX2 = ax + largTronco, tZ2 = az + zTronco;
+
+    // Base do Tronco (y=0)
+    arvore->addLinha(tX1, 0, tZ1, tX2, 0, tZ1);
+    arvore->addLinha(tX2, 0, tZ1, tX2, 0, tZ2);
+    arvore->addLinha(tX2, 0, tZ2, tX1, 0, tZ2);
+    arvore->addLinha(tX1, 0, tZ2, tX1, 0, tZ1);
+
+    // Topo do Tronco (y=altTronco)
+    arvore->addLinha(tX1, altTronco, tZ1, tX2, altTronco, tZ1);
+    arvore->addLinha(tX2, altTronco, tZ1, tX2, altTronco, tZ2);
+    arvore->addLinha(tX2, altTronco, tZ2, tX1, altTronco, tZ2);
+    arvore->addLinha(tX1, altTronco, tZ2, tX1, altTronco, tZ1);
+
+    // Conexões Verticais do Tronco
+    arvore->addLinha(tX1, 0, tZ1, tX1, altTronco, tZ1);
+    arvore->addLinha(tX2, 0, tZ1, tX2, altTronco, tZ1);
+    arvore->addLinha(tX2, 0, tZ2, tX2, altTronco, tZ2);
+    arvore->addLinha(tX1, 0, tZ2, tX1, altTronco, tZ2);
 
 
-    // arvore
-    // Tronco
-    Minha_Face* tronco = new Minha_Face("arvore_tronco");
-    tronco->addLinha(-150, 0, 0, -120, 0, 0);
-    tronco->addLinha(-120, 0, 0, -120, 100, 0);
-    tronco->addLinha(-120, 100, 0, -150, 100, 0);
-    tronco->addLinha(-150, 100, 0, -150, 0, 0);
-    ui->Mundo->displayFile.insertInicio(tronco);
+    // --- Copa (Pirâmide ou Cubo sobre o tronco) ---
+    // Vamos fazer uma Pirâmide para variar
+    double copaBaseY = altTronco;
+    double copaAlt = 100;
+    double copaLarg = 100; // Mais larga que o tronco
 
-    //folhas
-    Minha_Face* copa = new Minha_Face("arvore_copa");
-    copa->addLinha(-180, 100, 0, -200, 150, 0);
-    copa->addLinha(-200, 150, 0, -135, 220, 0); // Topo da árvore
-    copa->addLinha(-135, 220, 0, -70, 150, 0);
-    copa->addLinha(-70, 150, 0, -90, 100, 0);
-    copa->addLinha(-90, 100, 0, -180, 100, 0);
-    ui->Mundo->displayFile.insertInicio(copa);
+    // Centro da copa
+    double cx = ax + largTronco/2;
+    double cz = az + zTronco/2;
 
-    // ceu
-    // Lua
-    Minha_Face* lua = new Minha_Face("lua");
-    lua->addLinha(-430, 400, 0, -421, 421, 0);
-    lua->addLinha(-421, 421, 0, -400, 430, 0);
-    lua->addLinha(-400, 430, 0, -379, 421, 0);
-    lua->addLinha(-379, 421, 0, -370, 400, 0);
-    lua->addLinha(-370, 400, 0, -379, 379, 0);
-    lua->addLinha(-379, 379, 0, -400, 370, 0);
-    lua->addLinha(-400, 370, 0, -421, 379, 0);
-    lua->addLinha(-421, 379, 0, -430, 400, 0);
-    ui->Mundo->displayFile.insertInicio(lua);
+    // 4 Pontos da base da pirâmide
+    double cX1 = cx - copaLarg/2; double cZ1 = cz - copaLarg/2;
+    double cX2 = cx + copaLarg/2; double cZ2 = cz + copaLarg/2;
 
-    ui->Mundo->displayFile.insertInicio(new Meu_Ponto("estrela1", -300, 350, 0));
-    ui->Mundo->displayFile.insertInicio(new Meu_Ponto("estrela2", -100, 400, 0));
-    ui->Mundo->displayFile.insertInicio(new Meu_Ponto("estrela3", 50, 450, 0));
-    ui->Mundo->displayFile.insertInicio(new Meu_Ponto("estrela4", 400, 380, 0));
+    // Base da Copa
+    arvore->addLinha(cX1, copaBaseY, cZ1, cX2, copaBaseY, cZ1); // Frente
+    arvore->addLinha(cX2, copaBaseY, cZ1, cX2, copaBaseY, cZ2); // Dir
+    arvore->addLinha(cX2, copaBaseY, cZ2, cX1, copaBaseY, cZ2); // Fundo
+    arvore->addLinha(cX1, copaBaseY, cZ2, cX1, copaBaseY, cZ1); // Esq
+
+    // Ponta da Pirâmide (Topo)
+    double pX = cx;
+    double pY = copaBaseY + copaAlt;
+    double pZ = cz;
+
+    // Ligar base ao topo
+    arvore->addLinha(cX1, copaBaseY, cZ1, pX, pY, pZ);
+    arvore->addLinha(cX2, copaBaseY, cZ1, pX, pY, pZ);
+    arvore->addLinha(cX2, copaBaseY, cZ2, pX, pY, pZ);
+    arvore->addLinha(cX1, copaBaseY, cZ2, pX, pY, pZ);
+
+    ui->Mundo->displayFile.insertInicio(arvore);
+    arvore->translada(0,0,-60);
 
     Minha_Face* umbreon = m_objloader.loadObj("UmbreonLowPoly.obj");
     if(umbreon){
         ui->Mundo->displayFile.insertInicio(umbreon);
-    }else{
-        qDebug() << "Não foi possivel criar o .obj";
+    } else {
+        qDebug() << "Não foi possivel criar UmbreonLowPoly.obj";
     }
-    umbreon->escalaNoCentro(30,30,30);
-    umbreon->translada(-10,40,0);
+    umbreon->escalaNoCentro(10,10,10);
+    umbreon->translada(-10,40,-20);
 
     Minha_Face* gengar = m_objloader.loadObj("HAUNTER_pokemon.obj");
-    if(umbreon){
+    if(gengar){
         ui->Mundo->displayFile.insertInicio(gengar);
-    }else{
-        qDebug() << "Não foi possivel criar o .obj";
+    } else {
+        qDebug() << "Não foi possivel criar HAUNTER_pokemon.obj";
     }
-    gengar->escalaNoCentro(20,20,30);
-    gengar->translada(350,140,0);
+    gengar->escalaNoCentro(0.8,0.8,0.8);
+    gengar->translada(20,20,10);
 
     preencherListaObjetos();
+}
+
+MainWindow::~MainWindow() {
+    delete ui;
 }
 
 Meu_Objeto* MainWindow::getObjetoSelecionado() {
@@ -123,175 +165,123 @@ void MainWindow::preencherListaObjetos() {
 }
 
 void MainWindow::on_btnTransladar_clicked() {
-    const QString sel = ui->comboObjetos->currentText();
-    if (sel.isEmpty()) return;
-
+    Meu_Objeto* obj = getObjetoSelecionado();
+    if (!obj) return;
     const double dx = ui->spinDx->value();
     const double dy = ui->spinDy->value();
     const double dz = ui->spinDz->value();
-    Meu_Objeto* obj = ui->Mundo->displayFile.findByName(sel.toStdString());
-    if (!obj) return;
-
     obj->translada(dx, dy, dz);
-
     ui->Mundo->update();
 }
 
 void MainWindow::on_btnEscalar_clicked() {
-    const QString sel = ui->comboObjetos->currentText();
-    if (sel.isEmpty()) return;
-
+    Meu_Objeto* obj = getObjetoSelecionado();
+    if (!obj) return;
     const double sx = ui->spinSx->value();
     const double sy = ui->spinSy->value();
     const double sz = ui->spinSz->value();
     if (sx == 0.0 || sy == 0.0) return;
-
-    Meu_Objeto* obj = ui->Mundo->displayFile.findByName(sel.toStdString());
-    if (!obj) return;
     obj->escalaNoCentro(sx, sy, sz);
-
     ui->Mundo->update();
 }
 
 void MainWindow::on_btnRotacionarX_clicked() {
-    const QString sel = ui->comboObjetos->currentText();
-    if (sel.isEmpty()) return;
-
-    double ang = ui->spinAng->value();
-
-    Meu_Objeto* obj = ui->Mundo->displayFile.findByName(sel.toStdString());
+    Meu_Objeto* obj = getObjetoSelecionado();
     if (!obj) return;
+    double ang = ui->spinAng->value();
     obj->rotacionaXNoCentro(ang);
-
     ui->Mundo->update();
 }
 
 void MainWindow::on_btnRotacionarY_clicked() {
-    const QString sel = ui->comboObjetos->currentText();
-    if (sel.isEmpty()) return;
-
-    double ang = ui->spinAng->value();
-
-    Meu_Objeto* obj = ui->Mundo->displayFile.findByName(sel.toStdString());
+    Meu_Objeto* obj = getObjetoSelecionado();
     if (!obj) return;
+    double ang = ui->spinAng->value();
     obj->rotacionaYNoCentro(ang);
-
     ui->Mundo->update();
 }
 
 void MainWindow::on_btnRotacionarZ_clicked() {
-    const QString sel = ui->comboObjetos->currentText();
-    if (sel.isEmpty()) return;
-
-    double ang = ui->spinAng->value();
-
-    Meu_Objeto* obj = ui->Mundo->displayFile.findByName(sel.toStdString());
+    Meu_Objeto* obj = getObjetoSelecionado();
     if (!obj) return;
+    double ang = ui->spinAng->value();
     obj->rotacionaZNoCentro(ang);
-
     ui->Mundo->update();
 }
 
-void MainWindow::on_btnAntiX_clicked()
-{
-    const double angulo = 5.0;
-    ui->Mundo->getWindow().rotateX(angulo);
+void MainWindow::on_btnAntiX_clicked() {
+    ui->Mundo->getWindow().rotateX(5.0);
     ui->Mundo->update();
 }
 
-void MainWindow::on_btnHorX_clicked()
-{
-    const double angulo = -5.0;
-    ui->Mundo->getWindow().rotateX(angulo);
+void MainWindow::on_btnHorX_clicked() {
+    ui->Mundo->getWindow().rotateX(-5.0);
     ui->Mundo->update();
 }
 
-void MainWindow::on_btnAntiY_clicked()
-{
-    const double angulo = 5.0;
-    ui->Mundo->getWindow().rotateY(angulo);
+void MainWindow::on_btnAntiY_clicked() {
+    ui->Mundo->getWindow().rotateY(5.0);
     ui->Mundo->update();
 }
 
-void MainWindow::on_btnHorY_clicked()
-{
-    const double angulo = -5.0;
-    ui->Mundo->getWindow().rotateY(angulo);
+void MainWindow::on_btnHorY_clicked() {
+    ui->Mundo->getWindow().rotateY(-5.0);
     ui->Mundo->update();
 }
 
 void MainWindow::on_btnAntiZ_clicked() {
-    const double angulo = 5.0;
-    ui->Mundo->getWindow().rotateZ(angulo);
+    ui->Mundo->getWindow().rotateZ(5.0);
     ui->Mundo->update();
 }
 
 void MainWindow::on_btnHorZ_clicked() {
-    const double angulo = -5.0;
-    ui->Mundo->getWindow().rotateZ(angulo);
+    ui->Mundo->getWindow().rotateZ(-5.0);
     ui->Mundo->update();
 }
 
-void MainWindow::on_btnPanCima_clicked()
-{
-    ui->Mundo->getWindow().pan(0, 25.0);
+void MainWindow::on_btnPanCima_clicked() {
+    ui->Mundo->getWindow().pan(0, 25.0, 0);
     ui->Mundo->update();
 }
 
-void MainWindow::on_btnPanBaixo_clicked()
-{
-    ui->Mundo->getWindow().pan(0, -25.0);
+void MainWindow::on_btnPanBaixo_clicked() {
+    ui->Mundo->getWindow().pan(0, -25.0, 0);
+    ui->Mundo->desenhar();
+}
+
+void MainWindow::on_btnPanEsquerda_clicked() {
+    ui->Mundo->getWindow().pan(-25.0, 0, 0);
     ui->Mundo->update();
 }
 
-void MainWindow::on_btnPanEsquerda_clicked()
-{
-    ui->Mundo->getWindow().pan(-25.0, 0);
+void MainWindow::on_btnPanDireita_clicked() {
+    ui->Mundo->getWindow().pan(25.0, 0, 0);
     ui->Mundo->update();
 }
 
-void MainWindow::on_btnPanDireita_clicked()
-{
-    ui->Mundo->getWindow().pan(25.0, 0);
+void MainWindow::on_btnZoomIn_clicked() {
+    ui->Mundo->getWindow().zoom(0.9);
     ui->Mundo->update();
 }
 
-void MainWindow::on_btnZoomIn_clicked()
-{
-    const double fatorZoom = 0.9;
-    ui->Mundo->getWindow().zoom(fatorZoom);
+void MainWindow::on_btnZoomOut_clicked() {
+    ui->Mundo->getWindow().zoom(1.1);
     ui->Mundo->update();
 }
 
-void MainWindow::on_btnZoomOut_clicked()
-{
-    const double fatorZoom = 1.1;
-    ui->Mundo->getWindow().zoom(fatorZoom);
-    ui->Mundo->update();
-}
-
-void MainWindow::on_btnProjecaoXY_clicked()
-{
+void MainWindow::on_btnProjecaoXY_clicked() {
     ui->Mundo->setProjecao(Meu_frame::TipoProjecao::XY);
 }
 
-void MainWindow::on_btnProjecaoXZ_clicked()
-{
+void MainWindow::on_btnProjecaoXZ_clicked() {
     ui->Mundo->setProjecao(Meu_frame::TipoProjecao::XZ);
 }
 
-void MainWindow::on_btnProjecaoYZ_clicked()
-{
+void MainWindow::on_btnProjecaoYZ_clicked() {
     ui->Mundo->setProjecao(Meu_frame::TipoProjecao::YZ);
 }
 
-void MainWindow::on_btnProjecaoPerspectiva_clicked()
-{
+void MainWindow::on_btnProjecaoPerspectiva_clicked() {
     qDebug() << "Mudando para Projeção em Perspectiva";
     ui->Mundo->setProjecao(Meu_frame::TipoProjecao::PERSPECTIVA);
-}
-
-MainWindow::~MainWindow()
-{
-    delete ui;
 }

@@ -1,39 +1,48 @@
 #include "window.h"
+#include "Mat.h"
+#include <qdebug.h>
 
 Window::Window() {
-    centro = QVector3D(50.0, 150.0, 0.0);
-    rotacao = QVector3D(0.0, 0.0, 0.0);
-    altura = 600.0;
+    camX = 25.0;
+    camY = 40.0;
+    camZ = 1000.0;
+    angX = 0.0; angY = 0.0; angZ = 0.0;
+    largura = 1000.0;
+    altura = 1000.0;
 }
 
-void Window::pan(double dx, double dy) {
-    centro.setX(centro.x() + dx);
-    centro.setY(centro.y() + dy);
+void Window::pan(double dx, double dy, double dz) {
+    camX += dx;
+    camY += dy;
+    camZ += dz;
 }
 
 void Window::zoom(double factor) {
     altura *= factor;
+    largura *= factor;
 }
 
-void Window::rotateX(double degrees) {
-    rotacao.setX(rotacao.x() + degrees);
-}
+void Window::rotateX(double degrees) { angX += degrees; }
 
-void Window::rotateY(double degrees) {
-    rotacao.setY(rotacao.y() + degrees);
-}
+void Window::rotateY(double degrees) { angY += degrees; }
 
-void Window::rotateZ(double degrees) {
-    rotacao.setZ(rotacao.z() + degrees);
-}
+void Window::rotateZ(double degrees) { angZ += degrees; }
 
-QMatrix4x4 Window::getViewMatrix() const {
-    QMatrix4x4 mat;
-    double escala = 2.0 / altura;
-    mat.scale(escala, -escala, escala);
-    mat.rotate(rotacao.x(), 1, 0, 0);
-    mat.rotate(rotacao.y(), 0, 1, 0);
-    mat.rotate(rotacao.z(), 0, 0, 1);
-    mat.translate(-centro.x(), -centro.y(), -centro.z());
-    return mat;
+Matriz4x4 Window::getViewMatriz() const {
+    Matriz4x4 T = matrizTranslacao(-camX, -camY, -camZ);
+
+    Matriz4x4 Ry = rotacaoY(-angY);
+    Matriz4x4 Rx = rotacaoX(-angX);
+    Matriz4x4 Rz = rotacaoZ(-angZ);
+    Matriz4x4 R = multplicarMatrizes(Rz, multplicarMatrizes(Rx, Ry));
+
+    Matriz4x4 S = identidade();
+    if (largura > 0 && altura > 0) {
+        S.m[0][0] = 2.0 / largura;
+        S.m[1][1] = 2.0 / altura;
+        S.m[2][2] = 2.0 / ( (largura+altura)/2.0 );
+    }
+
+    Matriz4x4 RT = multplicarMatrizes(R, T);
+    return multplicarMatrizes(S, RT);
 }
